@@ -33,7 +33,8 @@ export default function StaffDisplay({ clef, vexKey, animateKey }: StaffDisplayP
           const renderer = new Renderer(containerRef.current, Renderer.Backends.SVG);
 
           // Configure the renderer size
-          renderer.resize(250, 150);
+          // Increase height to prevent bottom of treble clef from being cut off
+          renderer.resize(250, 200);
           const context = renderer.getContext();
           // Context styling for a modern look
 
@@ -41,8 +42,7 @@ export default function StaffDisplay({ clef, vexKey, animateKey }: StaffDisplayP
           context.scale(1.5, 1.5);
 
           // Create a stave of width 150 on the canvas.
-          // Move down slightly to ensure the top of the treble clef isn't cut off
-          const stave = new Stave(10, 40, 140);
+          const stave = new Stave(10, 30, 140);
 
           // Add clef and key signature
           stave.addClef(clef).addKeySignature(vexKey);
