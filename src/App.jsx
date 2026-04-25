@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import { Music, CheckCircle2, XCircle, Trophy } from 'lucide-react';
-import StaffDisplay from './components/StaffDisplay';
 import GameControls from './components/GameControls';
+const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, CLEFS, getRandomItems } from './utils/keys';
 import './App.css';
 
@@ -105,11 +105,13 @@ function App() {
           <div className="flashcard">
             {currentQuestion && (
               <div className="staff-wrapper">
-                <StaffDisplay 
-                  clef={currentQuestion.clef} 
-                  vexKey={currentQuestion.key.vexKey} 
-                  animateKey={animateKey}
-                />
+                <Suspense fallback={<div>Loading staff...</div>}>
+                  <StaffDisplay
+                    clef={currentQuestion.clef}
+                    vexKey={currentQuestion.key.vexKey}
+                    animateKey={animateKey}
+                  />
+                </Suspense>
               </div>
             )}
             
