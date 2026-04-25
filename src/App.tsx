@@ -4,6 +4,7 @@ import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
 import { Interval, IntervalQuestion, generateInterval, getRandomIntervals } from './utils/intervals';
+import { playInterval } from './utils/audio';
 import './App.css';
 
 export type QuestionType = 'keys' | 'intervals';
@@ -89,6 +90,10 @@ function App() {
     } else if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
       isCorrect = option.name === currentQuestion.interval.interval.name;
       correctName = currentQuestion.interval.interval.name;
+    }
+
+    if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
+      playInterval(currentQuestion.interval.notes);
     }
 
     if (isCorrect) {
