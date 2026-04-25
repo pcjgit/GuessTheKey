@@ -42,7 +42,7 @@ export default function StaffDisplay({ clef, vexKey, animateKey }: StaffDisplayP
           context.scale(1.5, 1.5);
 
           // Create a stave of width 150 on the canvas.
-          const stave = new Stave(10, 30, 140);
+          const stave = new Stave(10, 20, 140);
 
           // Add clef and key signature
           stave.addClef(clef).addKeySignature(vexKey);
