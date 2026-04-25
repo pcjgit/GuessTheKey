@@ -30,3 +30,7 @@ The application supports two distinct question types that users can toggle betwe
 - **Framework:** React with TypeScript.
 - **Build Tool:** Vite.
 - **Styling:** CSS with a modern, dark-themed UI.
+
+## Commands
+- **Local Development:** `npm run dev` starts the application on a local server.
+- **Production Build:** `npm run build` compiles the React application into a production-ready build.
