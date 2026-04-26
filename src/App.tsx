@@ -33,6 +33,7 @@ function App() {
   const [streak, setStreak] = useState(0);
   const [animateKey, setAnimateKey] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null); // { status: 'correct'|'incorrect', message: '' }
+  const [soundEnabled, setSoundEnabled] = useState(true);
 
   const generateQuestion = useCallback(() => {
     if (activeClefs.length === 0) return;
@@ -92,7 +93,7 @@ function App() {
       correctName = currentQuestion.interval.interval.name;
     }
 
-    if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
+    if (currentQuestion.type === 'intervals' && currentQuestion.interval && soundEnabled) {
       playInterval(currentQuestion.interval.notes);
     }
 
@@ -172,6 +173,8 @@ function App() {
             setMode={setMode}
             questionType={questionType}
             setQuestionType={setQuestionType}
+            soundEnabled={soundEnabled}
+            setSoundEnabled={setSoundEnabled}
           />
         </main>
       </div>

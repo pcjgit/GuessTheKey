@@ -24,9 +24,8 @@
 
 ## Pending Tasks
 1. Implement automated test scripts and unit/integration tests (currently missing).
-2. Add sound playback functionality for rendered notes and intervals.
-3. Improve responsive design for mobile devices and smaller screens.
-4. Expand interval generation to support more complex grading rules if necessary.
+2. Improve responsive design for mobile devices and smaller screens.
+3. Expand interval generation to support more complex grading rules if necessary.
 
 ## Running the App
 - **Development Server:** `npm run dev`
