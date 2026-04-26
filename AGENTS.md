@@ -12,6 +12,8 @@
 - **`GameControls` (Child):** Renders multiple-choice options and game settings (question type, major/minor mode, clef selection). Receives options and selection callbacks from `App`.
 
 ## Recent Changes
+- Set up automated deployment to GitHub Pages using the `gh-pages` package and GitHub Actions workflow (`.github/workflows/deploy.yml`) on pushes to `main`.
+- Configured Vite base path (`base: '/GuessTheKey/'`) and added deploy scripts to `package.json` for proper asset serving on GitHub Pages.
 - Implemented dynamic imports and code splitting for `StaffDisplay` and `vexflow` core modules to optimize Vite chunk sizes.
 - Added interval generation and multiple-choice handling alongside the existing key signature questions.
 - Updated VexFlow integration to explicitly load fonts (`VexFlow.setFonts('Bravura', 'Bravura')`) and wrap rendering logic in `document.fonts.ready` to ensure proper rendering without fallbacks.
@@ -31,4 +33,5 @@
 - **Development Server:** `npm run dev`
 - **Build (Production):** `npm run build`
 - **Linting:** `npm run lint`
+- **Deploy:** Automated via GitHub Actions on push to `main`. Can be run manually with `npm run deploy` (requires `gh-pages` configuration).
 - No special environment variables are required to run the current state.
