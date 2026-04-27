@@ -31,6 +31,7 @@ function App() {
   const [options, setOptions] = useState<(KeySignature | Interval)[]>([]);
   const [score, setScore] = useState(0);
   const [streak, setStreak] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [animateKey, setAnimateKey] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null); // { status: 'correct'|'incorrect', message: '' }
   const [soundEnabled, setSoundEnabled] = useState(true);
@@ -103,6 +104,8 @@ function App() {
     const scalePlayTime = (isKeys && soundEnabled) ? 2400 : 1000;
     const incorrectTime = (isKeys && soundEnabled) ? 3000 : 2500;
 
+    setTotalQuestions(t => t + 1);
+
     if (isCorrect) {
       // Correct!
       setScore(s => s + 1);
@@ -141,6 +144,7 @@ function App() {
               <Trophy size={16} /> 
               Streak: {streak}
             </div>
+            <div className="stat-badge total-badge">Total: {totalQuestions}</div>
           </div>
         </header>
         
