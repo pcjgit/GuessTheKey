@@ -52,9 +52,9 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
           // Minimum width + space per note. We want a more compact style.
           let dynamicStaveWidth = 140;
           if (isTimeSignature) {
-             // Increase space per note from 25 to 35 to prevent crowding
+             // Increase space per note from 25 to 17.5 to prevent crowding
              // Increase base width from 60 to 80
-             dynamicStaveWidth = Math.max(150, 80 + (numNotes * 35));
+             dynamicStaveWidth = Math.max(150, 80 + (numNotes * 17.5));
           }
 
           // Renderer width must accommodate the stave width * scale + padding
