@@ -49,14 +49,15 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
              numNotes = timeSignatureNotes.length;
           }
 
-          // Minimum width + space per note. Let's say ~40 pixels per note
+          // Minimum width + space per note. We want a more compact style.
           let dynamicStaveWidth = 140;
           if (isTimeSignature) {
-             dynamicStaveWidth = Math.max(200, 100 + (numNotes * 35));
+             dynamicStaveWidth = Math.max(150, 60 + (numNotes * 25));
           }
 
           // Renderer width must accommodate the stave width * scale + padding
-          const rendererWidth = (dynamicStaveWidth + 20) * scale;
+          // Increased padding from 20 to 40 to prevent left/right cutoff
+          const rendererWidth = (dynamicStaveWidth + 40) * scale;
 
           // Configure the renderer size
           // Increase height to prevent bottom of treble clef from being cut off
@@ -67,7 +68,8 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
           context.scale(scale, scale);
 
           // Create a stave on the canvas
-          const stave = new Stave(10, 20, dynamicStaveWidth);
+          // Shifted x-position from 10 to 20 to prevent left edge cutoff of the clef
+          const stave = new Stave(20, 20, dynamicStaveWidth);
 
           stave.addClef(clef);
 
