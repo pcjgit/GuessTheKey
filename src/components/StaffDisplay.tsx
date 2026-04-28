@@ -52,7 +52,9 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
           // Minimum width + space per note. We want a more compact style.
           let dynamicStaveWidth = 140;
           if (isTimeSignature) {
-             dynamicStaveWidth = Math.max(150, 60 + (numNotes * 25));
+             // Increase space per note from 25 to 35 to prevent crowding
+             // Increase base width from 60 to 80
+             dynamicStaveWidth = Math.max(150, 80 + (numNotes * 35));
           }
 
           // Renderer width must accommodate the stave width * scale + padding
@@ -62,6 +64,15 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
           // Configure the renderer size
           // Increase height to prevent bottom of treble clef from being cut off
           renderer.resize(rendererWidth, 200);
+
+          // Make the SVG scale down rather than overflow or get clipped
+          const svgElement = containerRef.current.querySelector('svg');
+          if (svgElement) {
+            svgElement.setAttribute('viewBox', `0 0 ${rendererWidth} 200`);
+            svgElement.style.maxWidth = '100%';
+            svgElement.style.height = 'auto';
+          }
+
           const context = renderer.getContext();
 
           // Increase size via SVG transform for better readability

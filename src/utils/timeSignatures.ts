@@ -103,9 +103,21 @@ function getRhythmForTimeSignature(ts: TimeSignature, clef: string): RhythmNote[
     'tenor': ['d/3', 'e/3', 'f/3', 'g/3', 'a/3', 'b/3', 'c/4', 'd/4']
   };
 
+  const restKeyMap: Record<string, string> = {
+    'treble': 'b/4',
+    'bass': 'd/3',
+    'alto': 'c/4',
+    'tenor': 'a/3'
+  };
+
   const pitches = pitchMap[clef] || pitchMap['treble'];
+  const restKey = restKeyMap[clef] || 'b/4';
 
   notes = notes.map(n => {
+    const isRest = Math.random() < 0.2; // 20% chance of rest
+    if (isRest) {
+      return { ...n, keys: [restKey], duration: n.duration + 'r' };
+    }
     const randomPitch = pitches[Math.floor(Math.random() * pitches.length)];
     return { ...n, keys: [randomPitch] };
   });
