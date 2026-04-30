@@ -151,13 +151,18 @@ function App() {
       setStreak(0);
       setFeedback({ 
         status: 'incorrect', 
-        message: `Oops! That was ${correctName}`
+        message: `Oops! Incorrect.`
       });
-      setTimeout(() => {
-        setFeedback(null);
-        generateQuestion();
-      }, incorrectTime);
     }
+  };
+
+  const handleTryAgain = () => {
+    setFeedback(null);
+  };
+
+  const handleNextQuestion = () => {
+    setFeedback(null);
+    generateQuestion();
   };
 
   return (
@@ -204,6 +209,12 @@ function App() {
               <div className={`feedback-overlay ${feedback.status}`}>
                  {feedback.status === 'correct' ? <CheckCircle2 size={64} /> : <XCircle size={64} />}
                  <h2>{feedback.message}</h2>
+                 {feedback.status === 'incorrect' && (
+                   <div className="feedback-actions">
+                     <button className="feedback-btn primary" onClick={handleTryAgain}>Try Again</button>
+                     <button className="feedback-btn secondary" onClick={handleNextQuestion}>Next Question</button>
+                   </div>
+                 )}
               </div>
             )}
           </div>
