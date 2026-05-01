@@ -2,6 +2,7 @@ import { KeySignature } from '../utils/keys';
 import { Interval } from '../utils/intervals';
 import { TimeSignature } from '../utils/timeSignatures';
 import { Ornament } from '../utils/ornaments';
+import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 
 interface Clef {
@@ -10,8 +11,8 @@ interface Clef {
 }
 
 interface GameControlsProps {
-  options: (KeySignature | Interval | TimeSignature | Ornament)[];
-  onSelect: (option: KeySignature | Interval | TimeSignature | Ornament) => void;
+  options: (KeySignature | Interval | TimeSignature | Ornament | Cadence)[];
+  onSelect: (option: KeySignature | Interval | TimeSignature | Ornament | Cadence) => void;
   clefs: Clef[];
   activeClefs: string[];
   toggleClef: (clefId: string) => void;
@@ -90,10 +91,17 @@ export default function GameControls({
             >
               Ornaments
             </button>
+            <button
+              className={`toggle-btn ${questionType === 'cadences' ? 'active' : ''}`}
+              onClick={() => setQuestionType('cadences')}
+              aria-pressed={questionType === 'cadences'}
+            >
+              Cadences
+            </button>
           </div>
         </div>
 
-        {questionType === 'intervals' && (
+        {(questionType === 'intervals' || questionType === 'cadences') && (
           <div className="settings-group">
             <h4>Sound</h4>
             <div className="toggle-group">
