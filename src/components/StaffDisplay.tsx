@@ -197,23 +197,11 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
             const { StaveNote, Accidental, Formatter, Voice } = VexFlowCore;
 
             const staveNotes = cadenceChords.map(chord => {
-              const sn = new StaveNote({
+              return new StaveNote({
                 keys: chord.keys,
                 duration: chord.duration,
                 clef: clef
               });
-
-              // Apply accidentals manually if they appear in the chord notation
-              // e.g. "c#/4"
-              chord.keys.forEach((keyStr, idx) => {
-                 const notePart = keyStr.split('/')[0];
-                 const accidental = notePart.slice(1);
-                 if (accidental) {
-                   sn.addModifier(new Accidental(accidental), idx);
-                 }
-              });
-
-              return sn;
             });
 
             // Cadence typically 2 half notes = 4 beats
@@ -222,6 +210,8 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
               beatValue: 4
             });
             voice.addTickables(staveNotes);
+
+            Accidental.applyAccidentals([voice], vexKey);
 
             const formatter = new Formatter();
             formatter.joinVoices([voice]).formatToStave([voice], stave);

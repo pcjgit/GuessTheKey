@@ -109,14 +109,12 @@ function buildChord(scale: { name: string; accidental: string }[], rootDegree: n
     lastIdx = degreeIdx;
   }
 
-  // For 4-part harmony style, add root doubled in bass (or just keep it simple as triad for now)
-  // We'll just stick to triads in root position or inversions to avoid messy voice leading logic
-  // Let's add a lower bass note for a fuller sound
   const bassDegreeIdx = degrees[0]; // Bass is the lowest note of the chord
   const bassNote = scale[bassDegreeIdx];
   const bassKeyStr = `${bassNote.name.toLowerCase()}${bassNote.accidental}/${baseOctave - 1}`;
 
-  return [bassKeyStr, ...notes];
+  // Return exactly 2 notes: the bass note, and the highest note of the triad
+  return [bassKeyStr, notes[2]];
 }
 
 export function generateCadenceQuestion(clef: string): CadenceQuestion {
