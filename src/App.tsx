@@ -250,6 +250,7 @@ function App() {
             setQuestionType={setQuestionType}
             soundEnabled={soundEnabled}
             setSoundEnabled={setSoundEnabled}
+            disabled={!!feedback}
           />
         </main>
       </div>
