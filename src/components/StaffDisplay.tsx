@@ -226,7 +226,9 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
   return (
     <div 
       className={`staff-container ${animateKey ? 'slide-in' : ''}`}
-      ref={containerRef} 
+      ref={containerRef}
+      role="img"
+      aria-label="Musical staff"
     />
   );
 }
