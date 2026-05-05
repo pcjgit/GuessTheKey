@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { KeySignature } from '../utils/keys';
 import { Interval } from '../utils/intervals';
 import { TimeSignature } from '../utils/timeSignatures';
@@ -41,6 +42,20 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (disabled || !options.length) return;
+
+      const num = parseInt(e.key, 10);
+      if (!isNaN(num) && num > 0 && num <= options.length) {
+        onSelect(options[num - 1]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [disabled, options, onSelect]);
+
   return (
     <div className="game-controls">
       
@@ -53,13 +68,17 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={`${i + 1}`}
           >
-            {opt.name}
-            {'symbol' in opt && opt.symbol ? (
-              <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
-                {opt.symbol}
-              </span>
-            ) : null}
+            <span className="option-content">
+              {opt.name}
+              {'symbol' in opt && opt.symbol ? (
+                <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                  {opt.symbol}
+                </span>
+              ) : null}
+            </span>
+            <kbd className="kbd-hint">{i + 1}</kbd>
           </button>
         ))}
       </div>
