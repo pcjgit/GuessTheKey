@@ -6,3 +6,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessibility]
 **Learning:** Purely decorative icons (like those adjacent to textual labels) are often announced redundantly or unhelpfully by screen readers.
 **Action:** Always add `aria-hidden="true"` to UI icons whose meaning is already conveyed by adjacent text, reducing cognitive load for visually impaired users.
+## 2024-05-06 - Hiding Keyboard Hints on Touch Devices
+**Learning:** Adding keyboard shortcut hints (like `<kbd>1</kbd>`) is great for accessibility and power users, but showing these hints on touch devices (phones/tablets) is confusing since they typically lack a physical keyboard.
+**Action:** Use CSS media queries `@media (hover: hover) and (pointer: fine)` to selectively display keyboard-specific UI elements only when a precise pointing device and hover capability (implying a traditional desktop/laptop setup with a keyboard) are detected. Hide them by default for a mobile-first approach.
