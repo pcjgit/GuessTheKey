@@ -1,5 +1,6 @@
-import { KeySignature, KEYS } from './keys';
-import { shuffle } from './arrayUtils';
+import type { KeySignature } from './keys.ts';
+import { KEYS } from './keys.ts';
+import { shuffle } from './arrayUtils.ts';
 
 export interface CadenceNote {
   keys: string[]; // e.g. ["c/4", "e/4", "g/4"]
@@ -22,6 +23,8 @@ export const CADENCES: Cadence[] = [
   { name: 'Plagal' },
   { name: 'Imperfect' }
 ];
+
+const VALID_KEYS = KEYS.filter(k => k.accidentals <= 6);
 
 // Returns an array of options to show (all 3 cadences, shuffled)
 export function getCadenceOptions(): Cadence[] {
@@ -120,8 +123,7 @@ function buildChord(scale: { name: string; accidental: string }[], rootDegree: n
 
 export function generateCadenceQuestion(clef: string): CadenceQuestion {
   // Random key (major or minor)
-  const validKeys = KEYS.filter(k => k.accidentals <= 6); // Keep it to max 6
-  const key = validKeys[Math.floor(Math.random() * validKeys.length)];
+  const key = VALID_KEYS[Math.floor(Math.random() * VALID_KEYS.length)];
 
   const scale = getScale(key);
 
