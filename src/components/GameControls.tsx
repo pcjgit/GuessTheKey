@@ -53,6 +53,7 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={`${i + 1}`}
           >
             {opt.name}
             {'symbol' in opt && opt.symbol ? (
@@ -60,6 +61,7 @@ export default function GameControls({
                 {opt.symbol}
               </span>
             ) : null}
+            <kbd className="shortcut-hint" aria-hidden="true">{i + 1}</kbd>
           </button>
         ))}
       </div>

@@ -111,7 +111,7 @@ function App() {
     });
   };
 
-  const handleSelect = (option: KeySignature | Interval | TimeSignature | Ornament | Cadence) => {
+  const handleSelect = useCallback((option: KeySignature | Interval | TimeSignature | Ornament | Cadence) => {
     if (feedback) return;
     if (!currentQuestion) return;
 
@@ -163,7 +163,22 @@ function App() {
         message: `Oops! Incorrect.`
       });
     }
-  };
+  }, [currentQuestion, feedback, generateQuestion, soundEnabled]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (feedback) return; // Don't allow selecting options while feedback is showing
+
+      const key = e.key;
+      if (['1', '2', '3', '4'].includes(key) && options.length >= parseInt(key)) {
+        const index = parseInt(key) - 1;
+        handleSelect(options[index]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, feedback, handleSelect]);
 
   const handleTryAgain = () => {
     setFeedback(null);
