@@ -2,6 +2,7 @@ import { KeySignature } from '../utils/keys';
 import { Interval } from '../utils/intervals';
 import { TimeSignature } from '../utils/timeSignatures';
 import { Ornament } from '../utils/ornaments';
+import { useEffect } from 'react';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 
@@ -41,6 +42,21 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (disabled || options.length === 0) return;
+      if (e.ctrlKey || e.altKey || e.metaKey || e.shiftKey) return;
+
+      const key = parseInt(e.key, 10);
+      if (key >= 1 && key <= options.length) {
+        onSelect(options[key - 1]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, onSelect, disabled]);
+
   return (
     <div className="game-controls">
       
@@ -53,7 +69,19 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={(i + 1).toString()}
           >
+            <kbd
+              className="stat-badge"
+              style={{
+                display: 'inline-flex',
+                marginRight: '0.5rem',
+                padding: '0.1rem 0.4rem',
+                fontSize: '0.8rem'
+              }}
+            >
+              {i + 1}
+            </kbd>
             {opt.name}
             {'symbol' in opt && opt.symbol ? (
               <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
