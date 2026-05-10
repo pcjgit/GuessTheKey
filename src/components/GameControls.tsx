@@ -2,6 +2,7 @@ import { KeySignature } from '../utils/keys';
 import { Interval } from '../utils/intervals';
 import { TimeSignature } from '../utils/timeSignatures';
 import { Ornament } from '../utils/ornaments';
+import { useEffect } from 'react';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 
@@ -41,6 +42,19 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (disabled) return;
+      const key = parseInt(e.key, 10);
+      if (!isNaN(key) && key >= 1 && key <= options.length) {
+        onSelect(options[key - 1]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, onSelect, disabled]);
+
   return (
     <div className="game-controls">
       
@@ -53,13 +67,17 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={(i + 1).toString()}
           >
-            {opt.name}
-            {'symbol' in opt && opt.symbol ? (
-              <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
-                {opt.symbol}
-              </span>
-            ) : null}
+            <span className="option-content">
+              {opt.name}
+              {'symbol' in opt && opt.symbol ? (
+                <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                  {opt.symbol}
+                </span>
+              ) : null}
+            </span>
+            <kbd className="keyboard-hint" aria-hidden="true">{i + 1}</kbd>
           </button>
         ))}
       </div>

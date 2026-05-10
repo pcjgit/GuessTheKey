@@ -6,3 +6,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessibility]
 **Learning:** Purely decorative icons (like those adjacent to textual labels) are often announced redundantly or unhelpfully by screen readers.
 **Action:** Always add `aria-hidden="true"` to UI icons whose meaning is already conveyed by adjacent text, reducing cognitive load for visually impaired users.
+## 2024-05-10 - Adding Keyboard Shortcuts and Accessible Page Title
+**Learning:** For interactive quiz apps with multiple-choice buttons, providing number-key shortcuts significantly speeds up user interaction and improves accessibility for keyboard users. Relying purely on tab navigation can be slow. Changing the `<title>` tag in `index.html` from a generic framework name to a descriptive app title is a low-effort, high-impact accessibility win that provides crucial context for screen reader users and improves tab organization.
+**Action:** When working on rapid-response UI elements, consider adding simple keyboard shortcuts documented with `<kbd>` tags hidden for touch devices via media queries. Always check `index.html` for generic titles and update them to accurately reflect the application.
