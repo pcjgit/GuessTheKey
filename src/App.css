@@ -216,6 +216,39 @@
   font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.option-content {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.keyboard-shortcut {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .keyboard-shortcut {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    border-radius: 6px;
+    padding: 0 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    position: absolute;
+    right: 1rem;
+  }
 }
 
 .option-btn:hover {
