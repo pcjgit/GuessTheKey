@@ -4,6 +4,7 @@ import { TimeSignature } from '../utils/timeSignatures';
 import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
+import { useEffect } from 'react';
 
 interface Clef {
   id: string;
@@ -41,6 +42,29 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (disabled) return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      const keyMap: Record<string, number> = {
+        '1': 0,
+        '2': 1,
+        '3': 2,
+        '4': 3
+      };
+
+      const optionIndex = keyMap[e.key];
+      if (optionIndex !== undefined && optionIndex < options.length) {
+        onSelect(options[optionIndex]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, onSelect, disabled]);
+
   return (
     <div className="game-controls">
       
@@ -53,7 +77,9 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={(i + 1).toString()}
           >
+            <kbd aria-hidden="true">{i + 1}</kbd>
             {opt.name}
             {'symbol' in opt && opt.symbol ? (
               <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>

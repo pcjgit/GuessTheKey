@@ -48,3 +48,21 @@ button:focus-visible {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+kbd {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  kbd {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.8rem;
+    font-family: monospace;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+  }
+}

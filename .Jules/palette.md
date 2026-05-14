@@ -9,3 +9,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-12 - Dynamic Main Heading Context
 **Learning:** Updating a single static page heading based on the active state/route is a critical UX pattern. In an SPA, users can lose context when switching between different exercises if the main heading doesn't change.
 **Action:** Always ensure the primary heading (`<h1>`) reflects the current context or task to improve spatial orientation and screen reader experience.
+## 2024-05-14 - Responsive Keyboard Shortcuts
+**Learning:** Adding visible keyboard shortcuts (`<kbd>`) to multiple-choice buttons significantly improves learning efficiency on desktop but creates UI clutter and confusion on mobile touch interfaces where physical keyboards are absent.
+**Action:** Always conditionally render `<kbd>` hints using the CSS media query `@media (hover: hover) and (pointer: fine)` so they remain accessible and visible to desktop users while remaining hidden for mobile users.
