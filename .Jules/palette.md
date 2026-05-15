@@ -12,3 +12,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessibility] Dynamic Document Titles
 **Learning:** In a Single Page Application (SPA), the page content changes without a full page reload, meaning the `<title>` tag doesn't automatically update. This leaves screen reader users without crucial context about their current state, and makes browser tabs indistinguishable.
 **Action:** Always dynamically update `document.title` to reflect the active route, task, or context (e.g., `document.title = \`\${currentContext} | App Name\``) to improve spatial orientation and tab navigation.
+## 2024-05-15 - Keyboard Shortcuts for Answer Selection
+**Learning:** Users often want to move quickly through repetitive multiple-choice questions without moving the mouse back and forth. Added global keyboard listeners mapping keys 1-4 to answer options. Used CSS media queries (`@media (hover: hover) and (pointer: fine)`) to ensure the `<kbd>` visual shortcut hint is only rendered on devices that support hovering, gracefully hiding them on mobile touch screens.
+**Action:** For interactive list/grid options, consider adding numeric keyboard shortcuts to drastically speed up power-user workflows, accompanied by ARIA `aria-keyshortcuts` attributes and responsive visual hints.

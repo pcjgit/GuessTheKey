@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { KeySignature } from '../utils/keys';
 import { Interval } from '../utils/intervals';
 import { TimeSignature } from '../utils/timeSignatures';
@@ -41,6 +42,34 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if typing in input
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        disabled
+      ) {
+        return;
+      }
+
+      const keyMap: Record<string, number> = {
+        '1': 0,
+        '2': 1,
+        '3': 2,
+        '4': 3,
+      };
+
+      const optionIndex = keyMap[e.key];
+      if (optionIndex !== undefined && options[optionIndex]) {
+        onSelect(options[optionIndex]);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [options, onSelect, disabled]);
+
   return (
     <div className="game-controls">
       
@@ -53,13 +82,19 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            aria-keyshortcuts={(i + 1).toString()}
           >
-            {opt.name}
-            {'symbol' in opt && opt.symbol ? (
-              <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
-                {opt.symbol}
+            <div className="option-content">
+              <span>
+                {opt.name}
+                {'symbol' in opt && opt.symbol ? (
+                  <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                    {opt.symbol}
+                  </span>
+                ) : null}
               </span>
-            ) : null}
+              <kbd className="shortcut-hint">{i + 1}</kbd>
+            </div>
           </button>
         ))}
       </div>
