@@ -173,6 +173,11 @@
   font-size: 1rem;
 }
 
+.feedback-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 .feedback-btn.primary {
   background: white;
   color: rgba(239, 68, 68, 1);
@@ -229,6 +234,11 @@
   transform: translateY(0);
 }
 
+.option-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 .settings-panel {
   display: flex;
   flex-direction: column;
@@ -271,6 +281,11 @@
   color: white;
   border-color: var(--primary);
   box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}
+
+.toggle-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 @media (max-width: 600px) {
