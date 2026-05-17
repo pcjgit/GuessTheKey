@@ -12,3 +12,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessibility] Dynamic Document Titles
 **Learning:** In a Single Page Application (SPA), the page content changes without a full page reload, meaning the `<title>` tag doesn't automatically update. This leaves screen reader users without crucial context about their current state, and makes browser tabs indistinguishable.
 **Action:** Always dynamically update `document.title` to reflect the active route, task, or context (e.g., `document.title = \`\${currentContext} | App Name\``) to improve spatial orientation and tab navigation.
+## 2024-05-24 - [Accessible Control Groups]
+**Learning:** Grouped interactive elements (like custom toggle buttons behaving as radio groups) are often indistinguishable to screen readers without proper grouping semantics, leaving users confused about context.
+**Action:** Always wrap custom control groups in `role="group"` and associate them with their respective heading using `aria-labelledby` to provide immediate context upon focus.
