@@ -91,7 +91,6 @@
 
 .score-badge { color: #60a5fa; }
 .streak-badge { color: #f59e0b; }
-.total-badge { color: #a78bfa; }
 
 /* Main Content */
 .main-content {

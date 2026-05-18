@@ -15,3 +15,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessible Control Groups]
 **Learning:** Grouped interactive elements (like custom toggle buttons behaving as radio groups) are often indistinguishable to screen readers without proper grouping semantics, leaving users confused about context.
 **Action:** Always wrap custom control groups in `role="group"` and associate them with their respective heading using `aria-labelledby` to provide immediate context upon focus.
+
+## 2024-05-18 - [Add icons to stats badges]
+**Learning:** Visual consistency in top-level status bars goes a long way. The "Streak" badge had an icon, while "Score" and "Total" lacked one. By filling in the gaps with semantic icons (`Star` and `Hash`) using the same design patterns (`aria-hidden="true"`, correct spacing, consistent colors), the header feels substantially more balanced and complete without any layout shift or major effort.
+**Action:** Always scan adjacent visual elements for symmetry or implied patterns, and use existing iconography systems (`lucide-react`) to bring stragglers in line.
