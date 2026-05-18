@@ -45,7 +45,7 @@ export default function GameControls({
     <div className="game-controls">
       
       {/* Multiple Choice Options */}
-      <div className="options-grid">
+      <div className="options-grid" role="group" aria-label="Answer options">
         {options.map((opt, i) => (
           <button 
             key={i} 
@@ -56,7 +56,7 @@ export default function GameControls({
           >
             {opt.name}
             {'symbol' in opt && opt.symbol ? (
-              <span style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+              <span aria-hidden="true" style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
                 {opt.symbol}
               </span>
             ) : null}
@@ -67,8 +67,8 @@ export default function GameControls({
       {/* Settings Panel */}
       <div className="settings-panel">
         <div className="settings-group">
-          <h4>Question Type</h4>
-          <div className="toggle-group">
+          <h4 id="qt-heading">Question Type</h4>
+          <div className="toggle-group" role="group" aria-labelledby="qt-heading">
             <button
               className={`toggle-btn ${questionType === 'keys' ? 'active' : ''}`}
               onClick={() => setQuestionType('keys')}
@@ -119,8 +119,8 @@ export default function GameControls({
 
         {(questionType === 'intervals' || questionType === 'cadences') && (
           <div className="settings-group">
-            <h4>Sound</h4>
-            <div className="toggle-group">
+            <h4 id="sound-heading">Sound</h4>
+            <div className="toggle-group" role="group" aria-labelledby="sound-heading">
               <button
                 className={`toggle-btn ${soundEnabled ? 'active' : ''}`}
                 onClick={() => setSoundEnabled(true)}
@@ -145,8 +145,8 @@ export default function GameControls({
 
         {questionType === 'keys' && (
           <div className="settings-group">
-            <h4>Mode</h4>
-          <div className="toggle-group">
+            <h4 id="mode-heading">Mode</h4>
+          <div className="toggle-group" role="group" aria-labelledby="mode-heading">
             <button 
               className={`toggle-btn ${mode === 'major' ? 'active' : ''}`}
               onClick={() => setMode('major')}
@@ -179,8 +179,8 @@ export default function GameControls({
         )}
 
         <div className="settings-group">
-          <h4>Clefs (ABRSM Grade 5)</h4>
-          <div className="toggle-group">
+          <h4 id="clefs-heading">Clefs (ABRSM Grade 5)</h4>
+          <div className="toggle-group" role="group" aria-labelledby="clefs-heading">
             {clefs.map(c => {
               const isFinalActiveClef = activeClefs.length === 1 && activeClefs.includes(c.id);
               const isClefDisabled = disabled || isFinalActiveClef;
