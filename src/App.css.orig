@@ -91,7 +91,6 @@
 
 .score-badge { color: #60a5fa; }
 .streak-badge { color: #f59e0b; }
-.total-badge { color: #a78bfa; }
 
 /* Main Content */
 .main-content {
@@ -224,14 +223,14 @@
   transition: all 0.2s ease;
 }
 
-.option-btn:not(:disabled):hover {
+.option-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.option-btn:not(:disabled):active {
+.option-btn:active {
   transform: translateY(0);
 }
 
@@ -272,7 +271,7 @@
   transition: all 0.2s ease;
 }
 
-.toggle-btn:not(:disabled):hover {
+.toggle-btn:hover {
   background: rgba(255, 255, 255, 0.08);
   color: white;
 }

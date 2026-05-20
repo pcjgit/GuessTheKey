@@ -15,6 +15,10 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Accessible Control Groups]
 **Learning:** Grouped interactive elements (like custom toggle buttons behaving as radio groups) are often indistinguishable to screen readers without proper grouping semantics, leaving users confused about context.
 **Action:** Always wrap custom control groups in `role="group"` and associate them with their respective heading using `aria-labelledby` to provide immediate context upon focus.
+
+## 2024-05-18 - [Add icons to stats badges]
+**Learning:** Visual consistency in top-level status bars goes a long way. The "Streak" badge had an icon, while "Score" and "Total" lacked one. By filling in the gaps with semantic icons (`Star` and `Hash`) using the same design patterns (`aria-hidden="true"`, correct spacing, consistent colors), the header feels substantially more balanced and complete without any layout shift or major effort.
+**Action:** Always scan adjacent visual elements for symmetry or implied patterns, and use existing iconography systems (`lucide-react`) to bring stragglers in line.
 ## 2024-05-25 - [Programmatic Focus Management]
 **Learning:** When disabling elements dynamically (e.g. while displaying a feedback overlay), keyboard users lose their focus position. This can force them to start tabbing from the top of the document once the element is re-enabled.
 **Action:** Always programmatically restore focus using `ref.current?.focus()` to a logical position (like the first option in a group) when transitioning out of a temporarily disabled state, and use `:not(:disabled)` in CSS for hover states to prevent confusing visual interactions when elements shouldn't be interacted with.

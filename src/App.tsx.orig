@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Music, CheckCircle2, XCircle, Trophy, Star, Hash } from 'lucide-react';
+import { Music, CheckCircle2, XCircle, Trophy } from 'lucide-react';
 import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, MAJOR_KEYS, MINOR_KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
@@ -88,7 +88,7 @@ function App() {
       const allOptions = getCadenceOptions();
       setOptions(allOptions);
     }
-    
+
     setAnimateKey(false);
     setTimeout(() => setAnimateKey(true), 50);
   }, [activeClefs, mode, questionType]);
@@ -158,8 +158,8 @@ function App() {
     } else {
       // Incorrect
       setStreak(0);
-      setFeedback({ 
-        status: 'incorrect', 
+      setFeedback({
+        status: 'incorrect',
         message: `Oops! Incorrect.`
       });
     }
@@ -197,28 +197,22 @@ function App() {
   return (
     <div className="app-wrapper">
       <div className="app-container">
-        
+
         <header className="header">
           <div className="title-group">
             <Music className="icon bounce" size={32} aria-hidden="true" />
             <h1>{titleMap[questionType]}</h1>
           </div>
           <div className="stats-group">
-            <div className="stat-badge score-badge">
-              <Star size={16} aria-hidden="true" />
-              Score: {score}
-            </div>
+            <div className="stat-badge score-badge">Score: {score}</div>
             <div className="stat-badge streak-badge">
               <Trophy size={16} aria-hidden="true" />
               Streak: {streak}
             </div>
-            <div className="stat-badge total-badge">
-              <Hash size={16} aria-hidden="true" />
-              Total: {totalQuestions}
-            </div>
+            <div className="stat-badge total-badge">Total: {totalQuestions}</div>
           </div>
         </header>
-        
+
         <main className="main-content">
           <div className="flashcard">
             {currentQuestion && currentQuestion.type === 'cadences' && currentQuestion.key && (
@@ -244,7 +238,7 @@ function App() {
                 </Suspense>
               </div>
             )}
-            
+
             {/* Feedback Overlay inside flashcard */}
             {feedback && (
               <div
@@ -263,8 +257,8 @@ function App() {
               </div>
             )}
           </div>
-          
-          <GameControls 
+
+          <GameControls
             options={options}
             onSelect={handleSelect}
             clefs={CLEFS}
