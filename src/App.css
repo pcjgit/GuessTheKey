@@ -223,14 +223,14 @@
   transition: all 0.2s ease;
 }
 
-.option-btn:hover {
+.option-btn:not(:disabled):hover {
   background: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.option-btn:active {
+.option-btn:not(:disabled):active {
   transform: translateY(0);
 }
 
@@ -271,7 +271,7 @@
   transition: all 0.2s ease;
 }
 
-.toggle-btn:hover {
+.toggle-btn:not(:disabled):hover {
   background: rgba(255, 255, 255, 0.08);
   color: white;
 }
