@@ -4,6 +4,7 @@ import { TimeSignature } from '../utils/timeSignatures';
 import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
+import { useEffect, useRef } from 'react';
 
 interface Clef {
   id: string;
@@ -41,6 +42,18 @@ export default function GameControls({
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
+  const firstOptionRef = useRef<HTMLButtonElement>(null);
+  const prevDisabledRef = useRef(disabled);
+
+  useEffect(() => {
+    // If we just transitioned from disabled to enabled (e.g. feedback dismissed),
+    // restore focus to the first option so keyboard users don't lose their place.
+    if (prevDisabledRef.current && !disabled) {
+      firstOptionRef.current?.focus();
+    }
+    prevDisabledRef.current = disabled;
+  }, [disabled]);
+
   return (
     <div className="game-controls">
       
@@ -49,6 +62,7 @@ export default function GameControls({
         {options.map((opt, i) => (
           <button 
             key={i} 
+            ref={i === 0 ? firstOptionRef : undefined}
             className="option-btn"
             onClick={() => onSelect(opt)}
             disabled={disabled}
