@@ -5,6 +5,7 @@ import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 import { useEffect, useRef } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 
 interface Clef {
   id: string;
@@ -142,7 +143,7 @@ export default function GameControls({
                 disabled={disabled}
                 style={disabled ? disabledStyle : undefined}
               >
-                Sound: On
+                <Volume2 size={16} aria-hidden="true" /> Sound: On
               </button>
               <button
                 className={`toggle-btn ${!soundEnabled ? 'active' : ''}`}
@@ -151,7 +152,7 @@ export default function GameControls({
                 disabled={disabled}
                 style={disabled ? disabledStyle : undefined}
               >
-                Sound: Off
+                <VolumeX size={16} aria-hidden="true" /> Sound: Off
               </button>
             </div>
           </div>

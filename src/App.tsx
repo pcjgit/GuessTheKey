@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Music, CheckCircle2, XCircle, Trophy, Star, Hash } from 'lucide-react';
+import { Music, CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight } from 'lucide-react';
 import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, MAJOR_KEYS, MINOR_KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
@@ -256,8 +256,8 @@ function App() {
                  <h2>{feedback.message}</h2>
                  {feedback.status === 'incorrect' && (
                    <div className="feedback-actions">
-                     <button className="feedback-btn primary" onClick={handleTryAgain} autoFocus>Try Again</button>
-                     <button className="feedback-btn secondary" onClick={handleNextQuestion}>Next Question</button>
+                     <button className="feedback-btn primary" onClick={handleTryAgain} autoFocus><RotateCcw size={16} aria-hidden="true" /> Try Again</button>
+                     <button className="feedback-btn secondary" onClick={handleNextQuestion}>Next Question <ArrowRight size={16} aria-hidden="true" /></button>
                    </div>
                  )}
               </div>
