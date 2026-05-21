@@ -22,3 +22,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-25 - [Programmatic Focus Management]
 **Learning:** When disabling elements dynamically (e.g. while displaying a feedback overlay), keyboard users lose their focus position. This can force them to start tabbing from the top of the document once the element is re-enabled.
 **Action:** Always programmatically restore focus using `ref.current?.focus()` to a logical position (like the first option in a group) when transitioning out of a temporarily disabled state, and use `:not(:disabled)` in CSS for hover states to prevent confusing visual interactions when elements shouldn't be interacted with.
+
+## 2026-05-20 - [Action Button Icons]
+**Learning:** Adding context-specific icons to action buttons and toggles (e.g., 'Try Again', 'Next Question', 'Sound') improves rapid recognition, especially during quick-paced practice sessions. It balances out the visual weight of text-only buttons and creates consistency across the UI.
+**Action:** Always scan for heavily-used text buttons and consider adding semantic icons with `aria-hidden="true"` using `inline-flex` and `gap` for proper alignment.
