@@ -26,3 +26,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-20 - [Action Button Icons]
 **Learning:** Adding context-specific icons to action buttons and toggles (e.g., 'Try Again', 'Next Question', 'Sound') improves rapid recognition, especially during quick-paced practice sessions. It balances out the visual weight of text-only buttons and creates consistency across the UI.
 **Action:** Always scan for heavily-used text buttons and consider adding semantic icons with `aria-hidden="true"` using `inline-flex` and `gap` for proper alignment.
+## 2024-05-25 - [Accessibility] Respect user motion preferences
+**Learning:** Users with vestibular disorders or motion sensitivities can experience nausea, dizziness, or headaches from CSS animations (like `bounce`, `slideIn`, or `popIn`). These should be disabled for users who have requested reduced motion in their OS settings.
+**Action:** Always include a global `@media (prefers-reduced-motion: reduce)` block in the root CSS file (like `index.css`) that aggressively disables `animation-duration`, `transition-duration`, and `scroll-behavior` for `*, *::before, *::after` using `!important`.
