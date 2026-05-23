@@ -68,6 +68,7 @@ export default function GameControls({
             onClick={() => onSelect(opt)}
             disabled={disabled}
             style={disabled ? disabledStyle : undefined}
+            title={disabled ? "Options are disabled while viewing feedback" : undefined}
           >
             {opt.name}
             {'symbol' in opt && opt.symbol ? (
@@ -132,7 +133,7 @@ export default function GameControls({
           </div>
         </div>
 
-        {(questionType === 'intervals' || questionType === 'cadences') && (
+        {questionType !== 'timeSignatures' && (
           <div className="settings-group">
             <h4 id="sound-heading">Sound</h4>
             <div className="toggle-group" role="group" aria-labelledby="sound-heading">

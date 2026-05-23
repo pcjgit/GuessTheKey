@@ -33,3 +33,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## $(date +%Y-%m-%d) - [Contextual Iconography]
 **Learning:** In a Single Page Application (SPA) where the main interface and layout remain static while internal task modes change (like different practice modes), static main heading icons can leave the interface feeling disconnected from the current user flow.
 **Action:** Always use contextual iconography consistently across navigation controls (e.g., toggle buttons) and primary headings. Mirroring the active mode's icon in the main heading reinforces the visual context and improves spatial orientation.
+## 2026-05-23 - [Tooltip Explanations for Disabled Controls]
+**Learning:** Disabling an element to prevent invalid states is good, but without explaining *why* it's disabled, the user is left guessing. The native `title` attribute is a lightweight, zero-dependency way to add this context for mouse users, improving clarity instantly.
+**Action:** When conditionally disabling user controls (like answer options during a feedback overlay), add a descriptive `title` attribute so users understand the constraint.
