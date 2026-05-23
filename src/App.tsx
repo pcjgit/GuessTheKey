@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { Music, CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight } from 'lucide-react';
+import { CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
 import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, MAJOR_KEYS, MINOR_KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
@@ -29,6 +29,14 @@ interface Feedback {
 }
 
 type Mode = 'major' | 'minor' | 'both';
+
+const iconMap: Record<QuestionType, React.ReactNode> = {
+  keys: <Key className="icon bounce" size={32} aria-hidden="true" />,
+  intervals: <MoveVertical className="icon bounce" size={32} aria-hidden="true" />,
+  timeSignatures: <Clock className="icon bounce" size={32} aria-hidden="true" />,
+  ornaments: <Sparkles className="icon bounce" size={32} aria-hidden="true" />,
+  cadences: <ListMusic className="icon bounce" size={32} aria-hidden="true" />,
+};
 
 function App() {
   const [activeClefs, setActiveClefs] = useState<string[]>(['treble', 'bass']);
@@ -200,7 +208,7 @@ function App() {
         
         <header className="header">
           <div className="title-group">
-            <Music className="icon bounce" size={32} aria-hidden="true" />
+            {iconMap[questionType]}
             <h1>{titleMap[questionType]}</h1>
           </div>
           <div className="stats-group">
