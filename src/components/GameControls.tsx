@@ -5,7 +5,7 @@ import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 import { useEffect, useRef } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
 
 interface Clef {
   id: string;
@@ -91,7 +91,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Key Signatures
+              <Key size={16} aria-hidden="true" /> Key Signatures
             </button>
             <button
               className={`toggle-btn ${questionType === 'intervals' ? 'active' : ''}`}
@@ -100,7 +100,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Intervals
+              <MoveVertical size={16} aria-hidden="true" /> Intervals
             </button>
             <button
               className={`toggle-btn ${questionType === 'timeSignatures' ? 'active' : ''}`}
@@ -109,7 +109,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Time Signatures
+              <Clock size={16} aria-hidden="true" /> Time Signatures
             </button>
             <button
               className={`toggle-btn ${questionType === 'ornaments' ? 'active' : ''}`}
@@ -118,7 +118,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Ornaments
+              <Sparkles size={16} aria-hidden="true" /> Ornaments
             </button>
             <button
               className={`toggle-btn ${questionType === 'cadences' ? 'active' : ''}`}
@@ -127,7 +127,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Cadences
+              <ListMusic size={16} aria-hidden="true" /> Cadences
             </button>
           </div>
         </div>
