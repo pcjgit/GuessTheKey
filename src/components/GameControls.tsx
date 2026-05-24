@@ -139,21 +139,17 @@ export default function GameControls({
             <div className="toggle-group" role="group" aria-labelledby="sound-heading">
               <button
                 className={`toggle-btn ${soundEnabled ? 'active' : ''}`}
-                onClick={() => setSoundEnabled(true)}
+                onClick={() => setSoundEnabled(!soundEnabled)}
                 aria-pressed={soundEnabled}
                 disabled={disabled}
                 style={disabled ? disabledStyle : undefined}
+                title={`Toggle sound ${soundEnabled ? 'off' : 'on'}`}
               >
-                <Volume2 size={16} aria-hidden="true" /> Sound: On
-              </button>
-              <button
-                className={`toggle-btn ${!soundEnabled ? 'active' : ''}`}
-                onClick={() => setSoundEnabled(false)}
-                aria-pressed={!soundEnabled}
-                disabled={disabled}
-                style={disabled ? disabledStyle : undefined}
-              >
-                <VolumeX size={16} aria-hidden="true" /> Sound: Off
+                {soundEnabled ? (
+                  <><Volume2 size={16} aria-hidden="true" /> Sound: On</>
+                ) : (
+                  <><VolumeX size={16} aria-hidden="true" /> Sound: Off</>
+                )}
               </button>
             </div>
           </div>
