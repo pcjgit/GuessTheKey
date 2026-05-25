@@ -36,3 +36,6 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-23 - [Tooltip Explanations for Disabled Controls]
 **Learning:** Disabling an element to prevent invalid states is good, but without explaining *why* it's disabled, the user is left guessing. The native `title` attribute is a lightweight, zero-dependency way to add this context for mouse users, improving clarity instantly.
 **Action:** When conditionally disabling user controls (like answer options during a feedback overlay), add a descriptive `title` attribute so users understand the constraint.
+## 2024-05-24 - [Consolidating Binary Options into Single Toggle Buttons]
+**Learning:** Using separate buttons for binary ON/OFF settings (like sound) increases cognitive load and clutters the UI, especially when using standard icons that can communicate state natively.
+**Action:** When a binary state is presented, consolidate it into a single toggle button utilizing `aria-pressed` and dynamic tooltips, which improves both spatial UI efficiency and accessibility semantics for screen readers.

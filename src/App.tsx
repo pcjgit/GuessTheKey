@@ -212,15 +212,15 @@ function App() {
             <h1>{titleMap[questionType]}</h1>
           </div>
           <div className="stats-group">
-            <div className="stat-badge score-badge">
+            <div className="stat-badge score-badge" title="Total correct answers">
               <Star size={16} aria-hidden="true" />
               Score: {score}
             </div>
-            <div className="stat-badge streak-badge">
+            <div className="stat-badge streak-badge" title="Current consecutive correct answers">
               <Trophy size={16} aria-hidden="true" />
               Streak: {streak}
             </div>
-            <div className="stat-badge total-badge">
+            <div className="stat-badge total-badge" title="Total questions answered">
               <Hash size={16} aria-hidden="true" />
               Total: {totalQuestions}
             </div>
