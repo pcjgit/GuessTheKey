@@ -25,6 +25,7 @@ interface GameControlsProps {
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
   disabled?: boolean;
+  guessedOptions?: string[];
 }
 
 export default function GameControls({ 
@@ -39,7 +40,8 @@ export default function GameControls({
   setQuestionType,
   soundEnabled,
   setSoundEnabled,
-  disabled = false
+  disabled = false,
+  guessedOptions = []
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
 
@@ -48,7 +50,7 @@ export default function GameControls({
 
   useEffect(() => {
     // If we just transitioned from disabled to enabled (e.g. feedback dismissed),
-    // restore focus to the first option so keyboard users don't lose their place.
+    // restore focus to the first available option so keyboard users don't lose their place.
     if (prevDisabledRef.current && !disabled) {
       firstOptionRef.current?.focus();
     }
@@ -60,24 +62,30 @@ export default function GameControls({
       
       {/* Multiple Choice Options */}
       <div className="options-grid" role="group" aria-label="Answer options">
-        {options.map((opt, i) => (
-          <button 
-            key={i} 
-            ref={i === 0 ? firstOptionRef : undefined}
-            className="option-btn"
-            onClick={() => onSelect(opt)}
-            disabled={disabled}
-            style={disabled ? disabledStyle : undefined}
-            title={disabled ? "Options are disabled while viewing feedback" : undefined}
-          >
-            {opt.name}
-            {'symbol' in opt && opt.symbol ? (
-              <span aria-hidden="true" style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
-                {opt.symbol}
-              </span>
-            ) : null}
-          </button>
-        ))}
+        {options.map((opt, i) => {
+          const isGuessed = guessedOptions.includes(opt.name);
+          const isOptionDisabled = disabled || isGuessed;
+          const isFirstAvailable = !isGuessed && options.slice(0, i).every(o => guessedOptions.includes(o.name));
+
+          return (
+            <button
+              key={i}
+              ref={isFirstAvailable ? firstOptionRef : undefined}
+              className="option-btn"
+              onClick={() => onSelect(opt)}
+              disabled={isOptionDisabled}
+              style={isOptionDisabled ? disabledStyle : undefined}
+              title={disabled ? "Options are disabled while viewing feedback" : (isGuessed ? "Incorrect guess" : undefined)}
+            >
+              {opt.name}
+              {'symbol' in opt && opt.symbol ? (
+                <span aria-hidden="true" style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                  {opt.symbol}
+                </span>
+              ) : null}
+            </button>
+          );
+        })}
       </div>
 
       {/* Settings Panel */}
