@@ -19,6 +19,10 @@ interface StaffDisplayProps {
   animateKey: boolean;
 }
 
+// Cache the dynamic import promise at the module level to avoid repeated evaluations
+// while preserving code splitting.
+const vexFlowPromise = Promise.all([import('vexflow/core'), import('vexflow/bravura')]);
+
 export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatureNotes, timeSignature, ornamentNotes, ornamentVoiceConfig, cadenceChords, questionType = 'keys', animateKey }: StaffDisplayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,10 +33,7 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
     containerRef.current.replaceChildren();
 
     // Dynamically import vexflow core to avoid the warning since the main module brings in everything
-    Promise.all([
-      import('vexflow/core'),
-      import('vexflow/bravura')
-    ]).then(([VexFlowCore]) => {
+    vexFlowPromise.then(([VexFlowCore]) => {
         const { Renderer, Stave, VexFlow } = VexFlowCore;
         VexFlow.setFonts('Bravura', 'Bravura');
 
