@@ -50,6 +50,7 @@ function App() {
   const [animateKey, setAnimateKey] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null); // { status: 'correct'|'incorrect', message: '' }
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [guessedOptions, setGuessedOptions] = useState<string[]>([]);
 
   const generateQuestion = useCallback(() => {
     if (activeClefs.length === 0) return;
@@ -97,6 +98,7 @@ function App() {
       setOptions(allOptions);
     }
     
+    setGuessedOptions([]);
     setAnimateKey(false);
     setTimeout(() => setAnimateKey(true), 50);
   }, [activeClefs, mode, questionType]);
@@ -166,6 +168,7 @@ function App() {
     } else {
       // Incorrect
       setStreak(0);
+      setGuessedOptions(prev => [...prev, option.name]);
       setFeedback({ 
         status: 'incorrect', 
         message: `Oops! Incorrect.`
@@ -285,6 +288,7 @@ function App() {
             soundEnabled={soundEnabled}
             setSoundEnabled={setSoundEnabled}
             disabled={feedback !== null}
+            guessedOptions={guessedOptions}
           />
         </main>
       </div>

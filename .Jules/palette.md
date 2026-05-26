@@ -39,3 +39,9 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2024-05-24 - [Consolidating Binary Options into Single Toggle Buttons]
 **Learning:** Using separate buttons for binary ON/OFF settings (like sound) increases cognitive load and clutters the UI, especially when using standard icons that can communicate state natively.
 **Action:** When a binary state is presented, consolidate it into a single toggle button utilizing `aria-pressed` and dynamic tooltips, which improves both spatial UI efficiency and accessibility semantics for screen readers.
+## 2026-05-26 - [Visual Tracking of Incorrect Guesses]
+**Learning:** When users make a mistake in a multiple-choice question, visually tracking and disabling the incorrectly guessed options significantly reduces cognitive load and frustration by preventing repeated mistakes. However, when returning from a feedback overlay, focus must be carefully restored to the *first available* (non-guessed) option to prevent focus-loss bugs for keyboard users.
+**Action:** Always visually distinguish and disable previously failed attempts in interactive guessing games, and ensure programmatic focus management () respects these newly disabled states.
+## 2026-05-26 - [Visual Tracking of Incorrect Guesses]
+**Learning:** When users make a mistake in a multiple-choice question, visually tracking and disabling the incorrectly guessed options significantly reduces cognitive load and frustration by preventing repeated mistakes. However, when returning from a feedback overlay, focus must be carefully restored to the *first available* (non-guessed) option to prevent focus-loss bugs for keyboard users.
+**Action:** Always visually distinguish and disable previously failed attempts in interactive guessing games, and ensure programmatic focus management (`ref.current?.focus()`) respects these newly disabled states.
