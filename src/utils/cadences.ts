@@ -36,8 +36,14 @@ const DIATONIC_NOTES = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
 
 // Map of key signatures to accidentals to apply to each note.
 // E.g. D Major -> F: #, C: #
+const keyAccidentalsCache = new Map<string, Record<string, string>>();
+
 function getKeyAccidentals(key: KeySignature): Record<string, string> {
-  const result: Record<string, string> = {};
+  const cacheKey = `${key.type}-${key.accidentals}`;
+  let result = keyAccidentalsCache.get(cacheKey);
+  if (result) return result;
+
+  result = {};
   const orderOfSharps = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
   const orderOfFlats = ['B', 'E', 'A', 'D', 'G', 'C', 'F'];
 
@@ -50,6 +56,10 @@ function getKeyAccidentals(key: KeySignature): Record<string, string> {
       result[orderOfFlats[i]] = 'b';
     }
   }
+
+  // Freeze the cached object to prevent accidental mutation by callers
+  Object.freeze(result);
+  keyAccidentalsCache.set(cacheKey, result);
   return result;
 }
 
