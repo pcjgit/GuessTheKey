@@ -45,3 +45,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-26 - [Visual Tracking of Incorrect Guesses]
 **Learning:** When users make a mistake in a multiple-choice question, visually tracking and disabling the incorrectly guessed options significantly reduces cognitive load and frustration by preventing repeated mistakes. However, when returning from a feedback overlay, focus must be carefully restored to the *first available* (non-guessed) option to prevent focus-loss bugs for keyboard users.
 **Action:** Always visually distinguish and disable previously failed attempts in interactive guessing games, and ensure programmatic focus management (`ref.current?.focus()`) respects these newly disabled states.
+
+## 2026-05-26 - Dynamic aria-labels for Musical Notation SVG
+**Learning:** Translating an SVG/canvas visual puzzle (like VexFlow output) into an equivalent logic puzzle description for screen readers using a dynamic `aria-label` allows visually impaired users to engage with spatial or visual-heavy content.
+**Action:** Use context-aware `aria-label` descriptions generated from state rather than generic fallbacks when replacing complex visual output.

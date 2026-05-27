@@ -17,13 +17,14 @@ interface StaffDisplayProps {
   cadenceChords?: CadenceNote[];
   questionType?: QuestionType;
   animateKey: boolean;
+  ariaLabel?: string;
 }
 
 // Cache the dynamic import promise at the module level to avoid repeated evaluations
 // while preserving code splitting.
 const vexFlowPromise = Promise.all([import('vexflow/core'), import('vexflow/bravura')]);
 
-export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatureNotes, timeSignature, ornamentNotes, ornamentVoiceConfig, cadenceChords, questionType = 'keys', animateKey }: StaffDisplayProps) {
+export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatureNotes, timeSignature, ornamentNotes, ornamentVoiceConfig, cadenceChords, questionType = 'keys', animateKey, ariaLabel }: StaffDisplayProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -229,7 +230,7 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
       className={`staff-container ${animateKey ? 'slide-in' : ''}`}
       ref={containerRef} 
       role="img"
-      aria-label="Musical staff"
+      aria-label={ariaLabel || "Musical staff"}
     />
   );
 }
