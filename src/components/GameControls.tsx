@@ -44,6 +44,7 @@ export default function GameControls({
   guessedOptions = []
 }: GameControlsProps) {
   const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
+  const guessedStyle = { ...disabledStyle, textDecoration: 'line-through' };
 
   const firstOptionRef = useRef<HTMLButtonElement>(null);
   const prevDisabledRef = useRef(disabled);
@@ -74,7 +75,7 @@ export default function GameControls({
               className="option-btn"
               onClick={() => onSelect(opt)}
               disabled={isOptionDisabled}
-              style={isOptionDisabled ? disabledStyle : undefined}
+              style={isOptionDisabled ? (isGuessed ? guessedStyle : disabledStyle) : undefined}
               title={disabled ? "Options are disabled while viewing feedback" : (isGuessed ? "Incorrect guess" : undefined)}
             >
               {opt.name}

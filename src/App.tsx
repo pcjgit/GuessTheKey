@@ -205,6 +205,30 @@ function App() {
     cadences: 'Guess the Cadence',
   };
 
+  const getStaffAriaLabel = () => {
+    if (!currentQuestion) return "Musical staff";
+
+    const clef = currentQuestion.clef;
+    let desc = "";
+
+    if (currentQuestion.type === 'keys' && currentQuestion.key) {
+       const sharps = currentQuestion.key.accidentals;
+       const type = currentQuestion.key.type;
+       desc = `showing key signature with ${sharps} ${type}`;
+    } else if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
+       const [n1, n2] = currentQuestion.interval.notes;
+       desc = `showing a chord with notes ${n1.name}${n1.accidental || ''} octave ${n1.octave} and ${n2.name}${n2.accidental || ''} octave ${n2.octave}`;
+    } else if (currentQuestion.type === 'timeSignatures') {
+       desc = `showing a sequence of rhythm notes to guess the time signature`;
+    } else if (currentQuestion.type === 'ornaments') {
+       desc = `showing an ornament execution to identify`;
+    } else if (currentQuestion.type === 'cadences' && currentQuestion.cadence) {
+       desc = `showing two chords for a cadence in ${currentQuestion.key?.name || 'a'} key`;
+    }
+
+    return `Musical staff in ${clef} clef ${desc}`;
+  };
+
   return (
     <div className="app-wrapper">
       <div className="app-container">
@@ -251,6 +275,7 @@ function App() {
                     cadenceChords={currentQuestion.cadence?.chords}
                     questionType={currentQuestion.type}
                     animateKey={animateKey}
+                    ariaLabel={getStaffAriaLabel()}
                   />
                 </Suspense>
               </div>
