@@ -49,3 +49,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-26 - Dynamic aria-labels for Musical Notation SVG
 **Learning:** Translating an SVG/canvas visual puzzle (like VexFlow output) into an equivalent logic puzzle description for screen readers using a dynamic `aria-label` allows visually impaired users to engage with spatial or visual-heavy content.
 **Action:** Use context-aware `aria-label` descriptions generated from state rather than generic fallbacks when replacing complex visual output.
+
+## 2026-05-27 - [Visual Elimination States]
+**Learning:** When users make an incorrect guess and the option is visually eliminated (e.g., via `textDecoration: 'line-through'`), screen readers only perceive the button as `disabled`. This missing context leaves users wondering why an option is disabled and whether it was their previous guess.
+**Action:** Always complement visual elimination states (like line-throughs or grayed-out text) with an explicit `<span className="sr-only">` explaining the state change to screen readers.
