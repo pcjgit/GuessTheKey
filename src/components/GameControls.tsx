@@ -78,6 +78,7 @@ export default function GameControls({
               style={isOptionDisabled ? (isGuessed ? guessedStyle : disabledStyle) : undefined}
               title={disabled ? "Options are disabled while viewing feedback" : (isGuessed ? "Incorrect guess" : undefined)}
             >
+              {isGuessed && <span className="sr-only">Incorrect guess: </span>}
               {opt.name}
               {'symbol' in opt && opt.symbol ? (
                 <span aria-hidden="true" style={{ fontSize: '1.5em', marginLeft: '0.25em', verticalAlign: 'middle', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
