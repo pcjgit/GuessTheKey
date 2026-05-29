@@ -261,6 +261,9 @@ function App() {
                 Key: {currentQuestion.key.name}
               </div>
             )}
+            <div className="sr-only" aria-live="polite">
+              {currentQuestion ? `New question: ${getStaffAriaLabel()}` : ''}
+            </div>
             {currentQuestion && (
               <div className="staff-wrapper">
                 <Suspense fallback={<div>Loading staff...</div>}>

@@ -53,3 +53,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-27 - [Visual Elimination States]
 **Learning:** When users make an incorrect guess and the option is visually eliminated (e.g., via `textDecoration: 'line-through'`), screen readers only perceive the button as `disabled`. This missing context leaves users wondering why an option is disabled and whether it was their previous guess.
 **Action:** Always complement visual elimination states (like line-throughs or grayed-out text) with an explicit `<span className="sr-only">` explaining the state change to screen readers.
+
+## 2026-05-28 - [Accessible Visual Puzzles]
+**Learning:** While setting `aria-label` on dynamic visual content (like a VexFlow SVG wrapper) is good, it isn't enough for users to actually consume it during rapid state changes. A visually impaired user must be able to discover the element via tab navigation (`tabIndex={0}`) AND be notified when the content changes automatically.
+**Action:** When dynamically generating complex visual output that represents a core task/puzzle, always make the wrapper keyboard-focusable (`tabIndex={0}`) with a clear `:focus-visible` outline. Additionally, pair this with an `aria-live` region elsewhere in the DOM to announce the new puzzle when the state changes so users don't have to manually re-focus to hear the update.
