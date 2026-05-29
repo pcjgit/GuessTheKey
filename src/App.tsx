@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
+import { CheckCircle2, XCircle, Trophy, Star, Hash, Target, RotateCcw, ArrowRight, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
 import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, MAJOR_KEYS, MINOR_KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
@@ -103,13 +103,13 @@ function App() {
     setTimeout(() => setAnimateKey(true), 50);
   }, [activeClefs, mode, questionType]);
 
-  // Re-generate question when type changes
+  // Re-generate question when settings change
   useEffect(() => {
     // We defer the generation slightly to avoid synchronous setState warnings inside the effect
     const timer = setTimeout(() => generateQuestion(), 0);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionType]);
+  }, [questionType, mode, activeClefs]);
 
   const toggleClef = (clefId: string) => {
     setActiveClefs(prev => {
@@ -197,6 +197,8 @@ function App() {
     document.title = `${titleMap[questionType]} | Music Theory Practice`;
   }, [questionType]);
 
+  const accuracy = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+
   const titleMap: Record<QuestionType, string> = {
     keys: 'Guess the Key',
     intervals: 'Guess the Interval',
@@ -250,6 +252,10 @@ function App() {
             <div className="stat-badge total-badge" title="Total questions answered">
               <Hash size={16} aria-hidden="true" />
               Total: {totalQuestions}
+            </div>
+            <div className="stat-badge accuracy-badge" title="Success rate percentage">
+              <Target size={16} aria-hidden="true" />
+              Accuracy: {accuracy}%
             </div>
           </div>
         </header>

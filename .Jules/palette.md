@@ -57,3 +57,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-28 - [Accessible Visual Puzzles]
 **Learning:** While setting `aria-label` on dynamic visual content (like a VexFlow SVG wrapper) is good, it isn't enough for users to actually consume it during rapid state changes. A visually impaired user must be able to discover the element via tab navigation (`tabIndex={0}`) AND be notified when the content changes automatically.
 **Action:** When dynamically generating complex visual output that represents a core task/puzzle, always make the wrapper keyboard-focusable (`tabIndex={0}`) with a clear `:focus-visible` outline. Additionally, pair this with an `aria-live` region elsewhere in the DOM to announce the new puzzle when the state changes so users don't have to manually re-focus to hear the update.
+
+## 2026-05-29 - [Contextual Clarity and Accuracy Feedback]
+**Learning:** Adding a real-time accuracy percentage provides a clear performance metric that motivates users, while contextual tooltips on disabled elements and semantic icons on mode toggles significantly reduce cognitive load and improve scannability.
+**Action:** Always provide quantitative feedback (like accuracy) when possible, and use native tooltips to explain interface constraints (like disabled buttons) to improve clarity for both mouse and screen reader users.

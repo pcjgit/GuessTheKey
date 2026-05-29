@@ -5,7 +5,7 @@ import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 import { useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
+import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic, Sun, Moon, SunMoon } from 'lucide-react';
 
 interface Clef {
   id: string;
@@ -101,6 +101,7 @@ export default function GameControls({
               aria-pressed={questionType === 'keys'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
               <Key size={16} aria-hidden="true" /> Key Signatures
             </button>
@@ -110,6 +111,7 @@ export default function GameControls({
               aria-pressed={questionType === 'intervals'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
               <MoveVertical size={16} aria-hidden="true" /> Intervals
             </button>
@@ -119,6 +121,7 @@ export default function GameControls({
               aria-pressed={questionType === 'timeSignatures'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
               <Clock size={16} aria-hidden="true" /> Time Signatures
             </button>
@@ -128,6 +131,7 @@ export default function GameControls({
               aria-pressed={questionType === 'ornaments'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
               <Sparkles size={16} aria-hidden="true" /> Ornaments
             </button>
@@ -137,6 +141,7 @@ export default function GameControls({
               aria-pressed={questionType === 'cadences'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
               <ListMusic size={16} aria-hidden="true" /> Cadences
             </button>
@@ -175,8 +180,9 @@ export default function GameControls({
               aria-pressed={mode === 'major'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
-              Major Keys
+              <Sun size={16} aria-hidden="true" /> Major Keys
             </button>
             <button 
               className={`toggle-btn ${mode === 'minor' ? 'active' : ''}`}
@@ -184,8 +190,9 @@ export default function GameControls({
               aria-pressed={mode === 'minor'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
-              Minor Keys
+              <Moon size={16} aria-hidden="true" /> Minor Keys
             </button>
             <button 
               className={`toggle-btn ${mode === 'both' ? 'active' : ''}`}
@@ -193,8 +200,9 @@ export default function GameControls({
               aria-pressed={mode === 'both'}
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
+              title={disabled ? "Controls are disabled while viewing feedback" : undefined}
             >
-              Both
+              <SunMoon size={16} aria-hidden="true" /> Both
             </button>
           </div>
         </div>
