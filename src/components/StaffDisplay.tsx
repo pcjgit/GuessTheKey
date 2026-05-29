@@ -231,6 +231,7 @@ export default function StaffDisplay({ clef, vexKey, intervalNotes, timeSignatur
       ref={containerRef} 
       role="img"
       aria-label={ariaLabel || "Musical staff"}
+      tabIndex={0}
     />
   );
 }
