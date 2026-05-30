@@ -57,3 +57,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-28 - [Accessible Visual Puzzles]
 **Learning:** While setting `aria-label` on dynamic visual content (like a VexFlow SVG wrapper) is good, it isn't enough for users to actually consume it during rapid state changes. A visually impaired user must be able to discover the element via tab navigation (`tabIndex={0}`) AND be notified when the content changes automatically.
 **Action:** When dynamically generating complex visual output that represents a core task/puzzle, always make the wrapper keyboard-focusable (`tabIndex={0}`) with a clear `:focus-visible` outline. Additionally, pair this with an `aria-live` region elsewhere in the DOM to announce the new puzzle when the state changes so users don't have to manually re-focus to hear the update.
+
+## 2026-05-30 - [Mode Selection Icons]
+**Learning:** Adding semantic iconography (Sun for Major, Moon for Minor) to abstract music theory concepts like "Mode" helps bridge the gap between technical terminology and visual intuition, making the interface feel more approachable and balanced.
+**Action:** Use universally recognized visual metaphors to reinforce textual categories, ensuring they are accessible with `aria-hidden="true"` when paired with clear labels.
