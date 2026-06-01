@@ -57,3 +57,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-28 - [Accessible Visual Puzzles]
 **Learning:** While setting `aria-label` on dynamic visual content (like a VexFlow SVG wrapper) is good, it isn't enough for users to actually consume it during rapid state changes. A visually impaired user must be able to discover the element via tab navigation (`tabIndex={0}`) AND be notified when the content changes automatically.
 **Action:** When dynamically generating complex visual output that represents a core task/puzzle, always make the wrapper keyboard-focusable (`tabIndex={0}`) with a clear `:focus-visible` outline. Additionally, pair this with an `aria-live` region elsewhere in the DOM to announce the new puzzle when the state changes so users don't have to manually re-focus to hear the update.
+
+## 2026-06-01 - [Intuitive Binary/Trinary Icons]
+**Learning:** For a "Both" state in a selection between Major (Sun) and Minor (Moon), the 'SunMoon' icon provides a perfect visual bridge that users instantly recognize as the combination of the two options.
+**Action:** When offering a "Both" or "All" option in a set of exclusive modes with strong metaphors, seek out composite icons that combine the metaphors of the individual modes.
