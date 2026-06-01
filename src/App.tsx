@@ -103,13 +103,12 @@ function App() {
     setTimeout(() => setAnimateKey(true), 50);
   }, [activeClefs, mode, questionType]);
 
-  // Re-generate question when type changes
+  // Re-generate question when type, mode, or clefs change
   useEffect(() => {
     // We defer the generation slightly to avoid synchronous setState warnings inside the effect
     const timer = setTimeout(() => generateQuestion(), 0);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [questionType]);
+  }, [generateQuestion]);
 
   const toggleClef = (clefId: string) => {
     setActiveClefs(prev => {
