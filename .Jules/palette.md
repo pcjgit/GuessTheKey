@@ -30,7 +30,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 **Learning:** Users with vestibular disorders or motion sensitivities can experience nausea, dizziness, or headaches from CSS animations (like `bounce`, `slideIn`, or `popIn`). These should be disabled for users who have requested reduced motion in their OS settings.
 **Action:** Always include a global `@media (prefers-reduced-motion: reduce)` block in the root CSS file (like `index.css`) that aggressively disables `animation-duration`, `transition-duration`, and `scroll-behavior` for `*, *::before, *::after` using `!important`.
 
-## $(date +%Y-%m-%d) - [Contextual Iconography]
+## 2026-06-03 - [Contextual Iconography]
 **Learning:** In a Single Page Application (SPA) where the main interface and layout remain static while internal task modes change (like different practice modes), static main heading icons can leave the interface feeling disconnected from the current user flow.
 **Action:** Always use contextual iconography consistently across navigation controls (e.g., toggle buttons) and primary headings. Mirroring the active mode's icon in the main heading reinforces the visual context and improves spatial orientation.
 ## 2026-05-23 - [Tooltip Explanations for Disabled Controls]

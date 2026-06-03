@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Suspense, lazy } from 'react';
-import { CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
+import { CheckCircle2, XCircle, Trophy, Star, Hash, RotateCcw, ArrowRight, Key, MoveVertical, Clock, Sparkles, ListMusic, Sun, Moon, SunMoon } from 'lucide-react';
 import GameControls from './components/GameControls';
 const StaffDisplay = lazy(() => import('./components/StaffDisplay'));
 import { KEYS, MAJOR_KEYS, MINOR_KEYS, CLEFS, getRandomItems, KeySignature } from './utils/keys';
@@ -36,6 +36,12 @@ const iconMap: Record<QuestionType, React.ReactNode> = {
   timeSignatures: <Clock className="icon bounce" size={32} aria-hidden="true" />,
   ornaments: <Sparkles className="icon bounce" size={32} aria-hidden="true" />,
   cadences: <ListMusic className="icon bounce" size={32} aria-hidden="true" />,
+};
+
+const modeIconMap: Record<Mode, React.ReactNode> = {
+  major: <Sun className="icon bounce" size={32} aria-hidden="true" />,
+  minor: <Moon className="icon bounce" size={32} aria-hidden="true" />,
+  both: <SunMoon className="icon bounce" size={32} aria-hidden="true" />,
 };
 
 function App() {
@@ -235,7 +241,7 @@ function App() {
         
         <header className="header">
           <div className="title-group">
-            {iconMap[questionType]}
+            {questionType === 'keys' ? modeIconMap[mode] : iconMap[questionType]}
             <h1>{titleMap[questionType]}</h1>
           </div>
           <div className="stats-group">
