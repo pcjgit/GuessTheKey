@@ -5,7 +5,7 @@ import { Ornament } from '../utils/ornaments';
 import { Cadence } from '../utils/cadences';
 import { QuestionType } from '../App';
 import { useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic } from 'lucide-react';
+import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic, Sun, Moon, SunMoon } from 'lucide-react';
 
 interface Clef {
   id: string;
@@ -176,7 +176,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Major Keys
+              <Sun size={16} aria-hidden="true" /> Major Keys
             </button>
             <button 
               className={`toggle-btn ${mode === 'minor' ? 'active' : ''}`}
@@ -185,7 +185,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Minor Keys
+              <Moon size={16} aria-hidden="true" /> Minor Keys
             </button>
             <button 
               className={`toggle-btn ${mode === 'both' ? 'active' : ''}`}
@@ -194,7 +194,7 @@ export default function GameControls({
               disabled={disabled}
               style={disabled ? disabledStyle : undefined}
             >
-              Both
+              <SunMoon size={16} aria-hidden="true" /> Both
             </button>
           </div>
         </div>
