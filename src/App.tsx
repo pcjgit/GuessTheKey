@@ -160,7 +160,9 @@ function App() {
       // Correct!
       setScore(s => s + 1);
       setStreak(s => s + 1);
-      setFeedback({ status: 'correct', message: 'Awesome job!' });
+      const messages = ['Awesome job!', 'Spot on!', 'Brilliant!', 'Correct!', 'Well done!', 'Excellent!'];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      setFeedback({ status: 'correct', message: randomMessage });
       setTimeout(() => {
         setFeedback(null);
         generateQuestion();
@@ -212,9 +214,13 @@ function App() {
     let desc = "";
 
     if (currentQuestion.type === 'keys' && currentQuestion.key) {
-       const sharps = currentQuestion.key.accidentals;
+       const count = currentQuestion.key.accidentals;
        const type = currentQuestion.key.type;
-       desc = `showing key signature with ${sharps} ${type}`;
+       if (count === 0) {
+         desc = "showing key signature with no sharps or flats";
+       } else {
+         desc = `showing key signature with ${count} ${type}${count > 1 ? 's' : ''}`;
+       }
     } else if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
        const [n1, n2] = currentQuestion.interval.notes;
        desc = `showing a chord with notes ${n1.name}${n1.accidental || ''} octave ${n1.octave} and ${n2.name}${n2.accidental || ''} octave ${n2.octave}`;

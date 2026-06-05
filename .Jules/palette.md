@@ -57,3 +57,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-05-28 - [Accessible Visual Puzzles]
 **Learning:** While setting `aria-label` on dynamic visual content (like a VexFlow SVG wrapper) is good, it isn't enough for users to actually consume it during rapid state changes. A visually impaired user must be able to discover the element via tab navigation (`tabIndex={0}`) AND be notified when the content changes automatically.
 **Action:** When dynamically generating complex visual output that represents a core task/puzzle, always make the wrapper keyboard-focusable (`tabIndex={0}`) with a clear `:focus-visible` outline. Additionally, pair this with an `aria-live` region elsewhere in the DOM to announce the new puzzle when the state changes so users don't have to manually re-focus to hear the update.
+
+## 2026-06-05 - [Natural Language ARIA Labels]
+**Learning:** When generating accessibility labels for musical state (like key signatures), using technical shorthand like "0 none" or "2 sharp" is functional but unnatural. Providing human-friendly descriptions like "no sharps or flats" and handling pluralization ("1 sharp" vs "2 sharps") significantly improves the clarity and professionalism of the screen reader experience.
+**Action:** Always refine dynamic ARIA labels to use natural language patterns and ensure correct pluralization for count-based descriptions.
