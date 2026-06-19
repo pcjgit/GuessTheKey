@@ -43,8 +43,12 @@ export default function GameControls({
   disabled = false,
   guessedOptions = []
 }: GameControlsProps) {
-  const disabledStyle = { opacity: 0.5, cursor: 'not-allowed' };
-  const guessedStyle = { ...disabledStyle, textDecoration: 'line-through' };
+  const getDisabledStyle = (hasTitle: boolean) => ({
+    opacity: 0.5,
+    cursor: hasTitle ? 'help' : 'not-allowed'
+  });
+
+  const baseDisabledStyle = getDisabledStyle(false);
 
   const firstOptionRef = useRef<HTMLButtonElement>(null);
   const prevDisabledRef = useRef(disabled);
@@ -68,6 +72,9 @@ export default function GameControls({
           const isOptionDisabled = disabled || isGuessed;
           const isFirstAvailable = !isGuessed && options.slice(0, i).every(o => guessedOptions.includes(o.name));
 
+          const title = disabled ? "Options are disabled while viewing feedback" : (isGuessed ? "Incorrect guess" : undefined);
+          const currentDisabledStyle = getDisabledStyle(!!title);
+
           return (
             <button
               key={i}
@@ -75,8 +82,8 @@ export default function GameControls({
               className="option-btn"
               onClick={() => onSelect(opt)}
               disabled={isOptionDisabled}
-              style={isOptionDisabled ? (isGuessed ? guessedStyle : disabledStyle) : undefined}
-              title={disabled ? "Options are disabled while viewing feedback" : (isGuessed ? "Incorrect guess" : undefined)}
+              style={isOptionDisabled ? (isGuessed ? { ...currentDisabledStyle, textDecoration: 'line-through' } : currentDisabledStyle) : undefined}
+              title={title}
             >
               {isGuessed && <span className="sr-only">Incorrect guess: </span>}
               {opt.name}
@@ -100,7 +107,7 @@ export default function GameControls({
               onClick={() => setQuestionType('keys')}
               aria-pressed={questionType === 'keys'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <Key size={16} aria-hidden="true" /> Key Signatures
             </button>
@@ -109,7 +116,7 @@ export default function GameControls({
               onClick={() => setQuestionType('intervals')}
               aria-pressed={questionType === 'intervals'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <MoveVertical size={16} aria-hidden="true" /> Intervals
             </button>
@@ -118,7 +125,7 @@ export default function GameControls({
               onClick={() => setQuestionType('timeSignatures')}
               aria-pressed={questionType === 'timeSignatures'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <Clock size={16} aria-hidden="true" /> Time Signatures
             </button>
@@ -127,7 +134,7 @@ export default function GameControls({
               onClick={() => setQuestionType('ornaments')}
               aria-pressed={questionType === 'ornaments'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <Sparkles size={16} aria-hidden="true" /> Ornaments
             </button>
@@ -136,7 +143,7 @@ export default function GameControls({
               onClick={() => setQuestionType('cadences')}
               aria-pressed={questionType === 'cadences'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <ListMusic size={16} aria-hidden="true" /> Cadences
             </button>
@@ -152,7 +159,7 @@ export default function GameControls({
                 onClick={() => setSoundEnabled(!soundEnabled)}
                 aria-pressed={soundEnabled}
                 disabled={disabled}
-                style={disabled ? disabledStyle : undefined}
+                style={disabled ? getDisabledStyle(true) : undefined}
                 title={`Toggle sound ${soundEnabled ? 'off' : 'on'}`}
               >
                 {soundEnabled ? (
@@ -174,7 +181,7 @@ export default function GameControls({
               onClick={() => setMode('major')}
               aria-pressed={mode === 'major'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <Sun size={16} aria-hidden="true" /> Major Keys
             </button>
@@ -183,7 +190,7 @@ export default function GameControls({
               onClick={() => setMode('minor')}
               aria-pressed={mode === 'minor'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <Moon size={16} aria-hidden="true" /> Minor Keys
             </button>
@@ -192,7 +199,7 @@ export default function GameControls({
               onClick={() => setMode('both')}
               aria-pressed={mode === 'both'}
               disabled={disabled}
-              style={disabled ? disabledStyle : undefined}
+              style={disabled ? baseDisabledStyle : undefined}
             >
               <SunMoon size={16} aria-hidden="true" /> Both
             </button>
@@ -214,7 +221,7 @@ export default function GameControls({
                   onClick={() => toggleClef(c.id)}
                   aria-pressed={activeClefs.includes(c.id)}
                   disabled={isClefDisabled}
-                  style={isClefDisabled ? disabledStyle : undefined}
+                  style={isClefDisabled ? getDisabledStyle(!!(disabled || isFinalActiveClef)) : undefined}
                   title={isFinalActiveClef ? "At least one clef must be selected." : undefined}
                 >
                   {c.label}
