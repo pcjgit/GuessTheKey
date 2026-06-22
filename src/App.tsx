@@ -38,6 +38,17 @@ const iconMap: Record<QuestionType, React.ReactNode> = {
   cadences: <ListMusic className="icon bounce" size={32} aria-hidden="true" />,
 };
 
+const TITLE_MAP: Record<QuestionType, string> = {
+  keys: 'Guess the Key',
+  intervals: 'Guess the Interval',
+  timeSignatures: 'Guess the Time Signature',
+  ornaments: 'Guess the Ornament',
+  cadences: 'Guess the Cadence',
+};
+
+const SUCCESS_MESSAGES = ['Awesome job!', 'Brilliant!', 'Spot on!', 'Keep it up!', 'Excellent!'];
+const FAILURE_MESSAGES = ['Oops! Incorrect.', 'Not quite.', 'Try again!', 'Almost there!', 'Give it another go!'];
+
 function App() {
   const [activeClefs, setActiveClefs] = useState<string[]>(['treble', 'bass']);
   const [mode, setMode] = useState<Mode>('both'); // 'major', 'minor', 'both'
@@ -160,7 +171,8 @@ function App() {
       // Correct!
       setScore(s => s + 1);
       setStreak(s => s + 1);
-      setFeedback({ status: 'correct', message: 'Awesome job!' });
+      const message = SUCCESS_MESSAGES[Math.floor(Math.random() * SUCCESS_MESSAGES.length)];
+      setFeedback({ status: 'correct', message });
       setTimeout(() => {
         setFeedback(null);
         generateQuestion();
@@ -169,9 +181,10 @@ function App() {
       // Incorrect
       setStreak(0);
       setGuessedOptions(prev => [...prev, option.name]);
+      const message = FAILURE_MESSAGES[Math.floor(Math.random() * FAILURE_MESSAGES.length)];
       setFeedback({ 
         status: 'incorrect', 
-        message: `Oops! Incorrect.`
+        message
       });
     }
   };
@@ -187,23 +200,8 @@ function App() {
 
   // Update document title dynamically based on the current context
   useEffect(() => {
-    const titleMap: Record<QuestionType, string> = {
-      keys: 'Guess the Key',
-      intervals: 'Guess the Interval',
-      timeSignatures: 'Guess the Time Signature',
-      ornaments: 'Guess the Ornament',
-      cadences: 'Guess the Cadence',
-    };
-    document.title = `${titleMap[questionType]} | Music Theory Practice`;
+    document.title = `${TITLE_MAP[questionType]} | Music Theory Practice`;
   }, [questionType]);
-
-  const titleMap: Record<QuestionType, string> = {
-    keys: 'Guess the Key',
-    intervals: 'Guess the Interval',
-    timeSignatures: 'Guess the Time Signature',
-    ornaments: 'Guess the Ornament',
-    cadences: 'Guess the Cadence',
-  };
 
   const getStaffAriaLabel = () => {
     if (!currentQuestion) return "Musical staff";
@@ -240,7 +238,7 @@ function App() {
         <header className="header">
           <div className="title-group">
             {iconMap[questionType]}
-            <h1>{titleMap[questionType]}</h1>
+            <h1>{TITLE_MAP[questionType]}</h1>
           </div>
           <div className="stats-group">
             <div className="stat-badge score-badge" title="Total correct answers">

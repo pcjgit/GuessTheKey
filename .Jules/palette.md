@@ -65,3 +65,11 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2026-06-12 - [Visual Affordance for Tooltips]
 **Learning:** Non-interactive elements that provide information via the `title` attribute (tooltips) are often missed by users because there is no visual cue that more info is available.
 **Action:** Use `cursor: help` on elements with informative `title` attributes to signal to the user that additional context is available on hover.
+
+## 2026-06-19 - [Delight and Accessibility]
+**Learning:** Combining randomized feedback messages with improved visual contrast and cursor affordances () on disabled elements creates a much more "polished" and accessible feel with minimal code.
+**Action:** Always check if a disabled state has a 'why' (e.g., a title) and use `cursor: help` to guide the user to that information.
+
+## 2025-05-15 - [Delight and Accessibility]
+**Learning:** Combining randomized feedback messages with improved visual contrast and cursor affordances (cursor: help) on disabled elements creates a much more "polished" and accessible feel with minimal code.
+**Action:** Always check if a disabled state has a 'why' (e.g., a title) and use `cursor: help` to guide the user to that information.
