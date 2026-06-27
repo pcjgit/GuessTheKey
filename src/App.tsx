@@ -46,8 +46,8 @@ const TITLE_MAP: Record<QuestionType, string> = {
   cadences: 'Guess the Cadence',
 };
 
-const SUCCESS_MESSAGES = ['Awesome job!', 'Brilliant!', 'Spot on!', 'Keep it up!', 'Excellent!'];
-const FAILURE_MESSAGES = ['Oops! Incorrect.', 'Not quite.', 'Try again!', 'Almost there!', 'Give it another go!'];
+const SUCCESS_MESSAGES = ['Awesome job! 🌟', 'Brilliant! ✨', 'Spot on! 🎯', 'Keep it up! 💪', 'Excellent! 🌈'];
+const FAILURE_MESSAGES = ['Oops! Incorrect. ❌', 'Not quite. 😕', 'Try again! 🔄', 'Almost there! 🔍', 'Give it another go! 🚀'];
 
 function App() {
   const [activeClefs, setActiveClefs] = useState<string[]>(['treble', 'bass']);

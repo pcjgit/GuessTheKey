@@ -10,6 +10,7 @@ import { Volume2, VolumeX, Key, MoveVertical, Clock, Sparkles, ListMusic, Sun, M
 interface Clef {
   id: string;
   label: string;
+  symbol?: string;
 }
 
 interface GameControlsProps {
@@ -224,6 +225,9 @@ export default function GameControls({
                   style={isClefDisabled ? getDisabledStyle(!!(disabled || isFinalActiveClef)) : undefined}
                   title={isFinalActiveClef ? "At least one clef must be selected." : undefined}
                 >
+                  <span aria-hidden="true" style={{ fontSize: '1.2em', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                    {c.symbol}
+                  </span>
                   {c.label}
                 </button>
               );

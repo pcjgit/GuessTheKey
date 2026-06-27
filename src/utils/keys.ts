@@ -47,10 +47,10 @@ export const MAJOR_KEYS = KEYS.filter(k => k.mode === 'major');
 export const MINOR_KEYS = KEYS.filter(k => k.mode === 'minor');
 
 export const CLEFS = [
-  { id: 'treble', label: 'Treble Clef' },
-  { id: 'bass', label: 'Bass Clef' },
-  { id: 'alto', label: 'Alto Clef' },
-  { id: 'tenor', label: 'Tenor Clef' },
+  { id: 'treble', label: 'Treble Clef', symbol: '𝄞' },
+  { id: 'bass', label: 'Bass Clef', symbol: '𝄢' },
+  { id: 'alto', label: 'Alto Clef', symbol: '𝄡' },
+  { id: 'tenor', label: 'Tenor Clef', symbol: '𝄡' },
 ];
 
 export interface KeySignature {

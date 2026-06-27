@@ -288,6 +288,7 @@
 .toggle-btn:not(:disabled):hover {
   background: rgba(255, 255, 255, 0.08);
   color: white;
+  transform: translateY(-1px);
 }
 
 .toggle-btn.active {
