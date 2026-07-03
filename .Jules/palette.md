@@ -73,3 +73,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2025-05-15 - [Delight and Accessibility]
 **Learning:** Combining randomized feedback messages with improved visual contrast and cursor affordances (cursor: help) on disabled elements creates a much more "polished" and accessible feel with minimal code.
 **Action:** Always check if a disabled state has a 'why' (e.g., a title) and use `cursor: help` to guide the user to that information.
+
+## 2026-07-03 - [Micro-UX: Consistency and Thematic Polish]
+**Learning:** Small thematic touches, like adding clef symbols (𝄞, 𝄢) to selection buttons, provide immediate visual context and reinforce the musical theme. Similarly, maintaining a consistent layout by avoiding conditional rendering of global toggles (like "Sound") prevents layout shifts and improves the sense of stability in the UI.
+**Action:** Always look for opportunities to add thematic icons and ensure global settings are persistent across different application modes to minimize cumulative layout shift (CLS).

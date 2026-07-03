@@ -48,8 +48,6 @@ export default function GameControls({
     cursor: hasTitle ? 'help' : 'not-allowed'
   });
 
-  const baseDisabledStyle = getDisabledStyle(false);
-
   const firstOptionRef = useRef<HTMLButtonElement>(null);
   const prevDisabledRef = useRef(disabled);
 
@@ -107,7 +105,8 @@ export default function GameControls({
               onClick={() => setQuestionType('keys')}
               aria-pressed={questionType === 'keys'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <Key size={16} aria-hidden="true" /> Key Signatures
             </button>
@@ -116,7 +115,8 @@ export default function GameControls({
               onClick={() => setQuestionType('intervals')}
               aria-pressed={questionType === 'intervals'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <MoveVertical size={16} aria-hidden="true" /> Intervals
             </button>
@@ -125,7 +125,8 @@ export default function GameControls({
               onClick={() => setQuestionType('timeSignatures')}
               aria-pressed={questionType === 'timeSignatures'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <Clock size={16} aria-hidden="true" /> Time Signatures
             </button>
@@ -134,7 +135,8 @@ export default function GameControls({
               onClick={() => setQuestionType('ornaments')}
               aria-pressed={questionType === 'ornaments'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <Sparkles size={16} aria-hidden="true" /> Ornaments
             </button>
@@ -143,34 +145,33 @@ export default function GameControls({
               onClick={() => setQuestionType('cadences')}
               aria-pressed={questionType === 'cadences'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <ListMusic size={16} aria-hidden="true" /> Cadences
             </button>
           </div>
         </div>
 
-        {questionType !== 'timeSignatures' && (
-          <div className="settings-group">
-            <h4 id="sound-heading">Sound</h4>
-            <div className="toggle-group" role="group" aria-labelledby="sound-heading">
-              <button
-                className={`toggle-btn ${soundEnabled ? 'active' : ''}`}
-                onClick={() => setSoundEnabled(!soundEnabled)}
-                aria-pressed={soundEnabled}
-                disabled={disabled}
-                style={disabled ? getDisabledStyle(true) : undefined}
-                title={`Toggle sound ${soundEnabled ? 'off' : 'on'}`}
-              >
-                {soundEnabled ? (
-                  <><Volume2 size={16} aria-hidden="true" /> Sound: On</>
-                ) : (
-                  <><VolumeX size={16} aria-hidden="true" /> Sound: Off</>
-                )}
-              </button>
-            </div>
+        <div className="settings-group">
+          <h4 id="sound-heading">Sound</h4>
+          <div className="toggle-group" role="group" aria-labelledby="sound-heading">
+            <button
+              className={`toggle-btn ${soundEnabled ? 'active' : ''}`}
+              onClick={() => setSoundEnabled(!soundEnabled)}
+              aria-pressed={soundEnabled}
+              disabled={disabled}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={`Toggle sound ${soundEnabled ? 'off' : 'on'}`}
+            >
+              {soundEnabled ? (
+                <><Volume2 size={16} aria-hidden="true" /> Sound: On</>
+              ) : (
+                <><VolumeX size={16} aria-hidden="true" /> Sound: Off</>
+              )}
+            </button>
           </div>
-        )}
+        </div>
 
         {questionType === 'keys' && (
           <div className="settings-group">
@@ -181,7 +182,8 @@ export default function GameControls({
               onClick={() => setMode('major')}
               aria-pressed={mode === 'major'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <Sun size={16} aria-hidden="true" /> Major Keys
             </button>
@@ -190,7 +192,8 @@ export default function GameControls({
               onClick={() => setMode('minor')}
               aria-pressed={mode === 'minor'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <Moon size={16} aria-hidden="true" /> Minor Keys
             </button>
@@ -199,7 +202,8 @@ export default function GameControls({
               onClick={() => setMode('both')}
               aria-pressed={mode === 'both'}
               disabled={disabled}
-              style={disabled ? baseDisabledStyle : undefined}
+              style={disabled ? getDisabledStyle(true) : undefined}
+              title={disabled ? "Settings are disabled while viewing feedback" : undefined}
             >
               <SunMoon size={16} aria-hidden="true" /> Both
             </button>
@@ -213,6 +217,7 @@ export default function GameControls({
             {clefs.map(c => {
               const isFinalActiveClef = activeClefs.length === 1 && activeClefs.includes(c.id);
               const isClefDisabled = disabled || isFinalActiveClef;
+              const title = disabled ? "Settings are disabled while viewing feedback" : (isFinalActiveClef ? "At least one clef must be selected." : undefined);
 
               return (
                 <button
@@ -221,9 +226,12 @@ export default function GameControls({
                   onClick={() => toggleClef(c.id)}
                   aria-pressed={activeClefs.includes(c.id)}
                   disabled={isClefDisabled}
-                  style={isClefDisabled ? getDisabledStyle(!!(disabled || isFinalActiveClef)) : undefined}
-                  title={isFinalActiveClef ? "At least one clef must be selected." : undefined}
+                  style={isClefDisabled ? getDisabledStyle(!!title) : undefined}
+                  title={title}
                 >
+                  <span aria-hidden="true" style={{ fontSize: '1.2em', fontFamily: '"Noto Music", "Bravura", "Segoe UI Symbol", "Apple Symbols", "Symbola", serif' }}>
+                    {c.id === 'treble' ? '𝄞 ' : c.id === 'bass' ? '𝄢 ' : '𝄡 '}
+                  </span>
                   {c.label}
                 </button>
               );

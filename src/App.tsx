@@ -46,8 +46,8 @@ const TITLE_MAP: Record<QuestionType, string> = {
   cadences: 'Guess the Cadence',
 };
 
-const SUCCESS_MESSAGES = ['Awesome job!', 'Brilliant!', 'Spot on!', 'Keep it up!', 'Excellent!'];
-const FAILURE_MESSAGES = ['Oops! Incorrect.', 'Not quite.', 'Try again!', 'Almost there!', 'Give it another go!'];
+const SUCCESS_MESSAGES = ['Awesome job! 🌟', 'Brilliant! 🎯', 'Spot on! ✨', 'Keep it up! 🚀', 'Excellent! 💎'];
+const FAILURE_MESSAGES = ['Oops! Incorrect. 🧐', 'Not quite. 🤏', 'Try again! 🔄', 'Almost there! 😅', 'Give it another go! 💪'];
 
 function App() {
   const [activeClefs, setActiveClefs] = useState<string[]>(['treble', 'bass']);
@@ -219,7 +219,10 @@ function App() {
        }
     } else if (currentQuestion.type === 'intervals' && currentQuestion.interval) {
        const [n1, n2] = currentQuestion.interval.notes;
-       desc = `showing a chord with notes ${n1.name}${n1.accidental || ''} octave ${n1.octave} and ${n2.name}${n2.accidental || ''} octave ${n2.octave}`;
+       const accMap: Record<string, string> = { '#': ' sharp', 'b': ' flat', '##': ' double sharp', 'bb': ' double flat', 'n': ' natural' };
+       const a1 = accMap[n1.accidental] || '';
+       const a2 = accMap[n2.accidental] || '';
+       desc = `showing a chord with notes ${n1.name}${a1} octave ${n1.octave} and ${n2.name}${a2} octave ${n2.octave}`;
     } else if (currentQuestion.type === 'timeSignatures') {
        desc = `showing a sequence of rhythm notes to guess the time signature`;
     } else if (currentQuestion.type === 'ornaments') {
