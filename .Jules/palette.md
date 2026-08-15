@@ -73,3 +73,7 @@ When implementing disabled states for UI elements without adding new CSS classes
 ## 2025-05-15 - [Delight and Accessibility]
 **Learning:** Combining randomized feedback messages with improved visual contrast and cursor affordances (cursor: help) on disabled elements creates a much more "polished" and accessible feel with minimal code.
 **Action:** Always check if a disabled state has a 'why' (e.g., a title) and use `cursor: help` to guide the user to that information.
+
+## 2025-05-22 - [Musical Context in UI Controls]
+**Learning:** Adding domain-specific symbols (like musical clefs) alongside text labels in interactive controls provides immediate visual context and improves recognition speed for specialized users. Using a dedicated font stack for these symbols ensures cross-platform consistency.
+**Action:** Always complement domain-specific terminology with representative icons or symbols (marked with `aria-hidden="true"`) to create a more intuitive and professional-feeling interface.
